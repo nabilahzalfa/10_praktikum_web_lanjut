@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -22,7 +23,7 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         return view('articles.create');
     }
@@ -35,8 +36,8 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->file('image')) {
-            $image_name = $request->file('image')->store('images', 'public');
+        if ($request->file('featured_image')) {
+            $image_name = $request->file('featured_image')->store('images', 'public');
         }
 
         Article::create([
